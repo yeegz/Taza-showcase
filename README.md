@@ -18,7 +18,7 @@ Taza is the first module of a restaurant operating system: **Pickup Lite**.
 - **Customers follow their order live.** They scan a QR, open a link or tap an NFC tag and get a big queue number, a scene of their food being made and a progress track that fills: Received, Making, Ready, Collected. The page can buzz them when it's ready, and it keeps working through a bad connection.
 - **Each business type has its own scenes.** A burger place shows a patty on the grill, then the burger assembling. A shawarma place shows the spit being carved, then the wrap. Coffee, bubble tea, bakery, noodles and rice all have their own loops.
 - **Ready is the big moment.** The top of the page turns into a yellow ticket you can read at arm's length, the same yellow the pickup TV uses. The screen stays awake while the order is on its way, because iPhones get no notifications from a web page.
-- **Some places don't show the steps.** They can switch to "just when it's ready". Customers then see honest time since ordering and a calm ring, never a fake progress bar.
+- **Some places don't show the steps.** They can switch to "just when it's ready". Customers then see the same bar filled by honest time since ordering against the usual wait. It never fakes steps or fills up before staff tap Ready.
 - **Staff can take orders by voice.** In capture mode the counter says the order out loud, Taza lists it against the menu, and staff tap Ready when it's done. Orders get a Taza number or keep the business's own POS number.
 - **The business builds its own menu.** Photos, options ("no lettuce"), combos with a chosen drink, and discounted add-ons suggested after an item is added, if the owner switches that on.
 - **Any business sets itself up.** It signs up from the website, says what it serves, chooses how much customers see, adds a few items, picks its look and sends itself a practice order.
@@ -27,7 +27,7 @@ Taza is the first module of a restaurant operating system: **Pickup Lite**.
 
 | Ready-only mode, then collected | Dark surface |
 |---|---|
-| <img src="assets/screens/customer-readyonly-collected.webp" alt="Left: We're on it, usually about 8 min, with a ring and time since ordering over a grill scene. Right: Enjoy, collected, with a check badge on the cup"> | <img src="assets/screens/customer-ink.webp" alt="The same page on a near-black surface: Carving it now over a shawarma spit, then Ready to collect with the wrap on the yellow ticket"> |
+| <img src="assets/screens/customer-readyonly-collected.webp" alt="Left: We're on it, with the progress bar filled by time since ordering and Usually 8 min, over a grill scene. Right: Enjoy, collected, with a check badge on the cup"> | <img src="assets/screens/customer-ink.webp" alt="The same page on a near-black surface: Carving it now over a shawarma spit, then Ready to collect with the wrap on the yellow ticket"> |
 
 <p align="center"><img src="assets/gifs/customer-tour.gif" width="300" alt="Recorded tour: an order goes from Got your order to On the grill now to Ready to collect, the burger stacking and the page turning yellow"></p>
 
