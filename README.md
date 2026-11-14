@@ -9,7 +9,7 @@
 
 <p align="center">Paused, not deployed. Runs end to end on a local stack. The source is private.</p>
 
-<img src="assets/screens/customer-trio.webp" alt="A customer's order page in three states: Got your order with a coffee grinder, Brewing it now with an espresso machine pouring, and Ready to collect with the number in red and a steaming cup">
+<img src="assets/screens/customer-trio.webp" alt="A customer's order page in three states: Got your order with a coffee grinder, Brewing it now with an espresso machine pouring, and Ready to collect, where the top of the page turns into a big yellow ticket with the number and a steaming cup">
 
 ## What it does
 
@@ -17,6 +17,7 @@ Taza is the first module of a restaurant operating system: **Pickup Lite**.
 
 - **Customers follow their order live.** They scan a QR, open a link or tap an NFC tag and get a big queue number, a scene of their food being made and a progress track that fills: Received, Making, Ready, Collected. The page can buzz them when it's ready, and it keeps working through a bad connection.
 - **Each business type has its own scenes.** A burger place shows a patty on the grill, then the burger assembling. A shawarma place shows the spit being carved, then the wrap. Coffee, bubble tea, bakery, noodles and rice all have their own loops.
+- **Ready is the big moment.** The top of the page turns into a yellow ticket you can read at arm's length, the same yellow the pickup TV uses. The screen stays awake while the order is on its way, because iPhones get no notifications from a web page.
 - **Some places don't show the steps.** They can switch to "just when it's ready". Customers then see honest time since ordering and a calm ring, never a fake progress bar.
 - **Staff can take orders by voice.** In capture mode the counter says the order out loud, Taza lists it against the menu, and staff tap Ready when it's done. Orders get a Taza number or keep the business's own POS number.
 - **The business builds its own menu.** Photos, options ("no lettuce"), combos with a chosen drink, and discounted add-ons suggested after an item is added, if the owner switches that on.
@@ -26,9 +27,9 @@ Taza is the first module of a restaurant operating system: **Pickup Lite**.
 
 | Ready-only mode, then collected | Dark surface |
 |---|---|
-| <img src="assets/screens/customer-readyonly-collected.webp" alt="Left: We're on it, usually about 8 min, with a ring and time since ordering over a grill scene. Right: Enjoy, collected, with a check badge on the cup"> | <img src="assets/screens/customer-ink.webp" alt="The same page on a near-black surface: Carving it now over a shawarma spit, then Ready to collect with the wrap"> |
+| <img src="assets/screens/customer-readyonly-collected.webp" alt="Left: We're on it, usually about 8 min, with a ring and time since ordering over a grill scene. Right: Enjoy, collected, with a check badge on the cup"> | <img src="assets/screens/customer-ink.webp" alt="The same page on a near-black surface: Carving it now over a shawarma spit, then Ready to collect with the wrap on the yellow ticket"> |
 
-<p align="center"><img src="assets/gifs/customer-tour.gif" width="300" alt="Recorded tour: an order goes from Got your order to On the grill now to Ready to collect, the burger assembling and the number turning red"></p>
+<p align="center"><img src="assets/gifs/customer-tour.gif" width="300" alt="Recorded tour: an order goes from Got your order to On the grill now to Ready to collect, the burger stacking and the page turning yellow"></p>
 
 ## Every kind of counter
 
@@ -53,19 +54,20 @@ Taza is the first module of a restaurant operating system: **Pickup Lite**.
 - **Backend:** .NET 10, ASP.NET Core minimal APIs as a modular monolith (organization, identity, entitlements, catalog, ordering, tracking, branding, NFC, board, onboarding). EF Core 10 on PostgreSQL 17. SignalR for the kitchen board, the customer page and the pickup display.
 - **Correctness:** transactional outbox with a `FOR UPDATE SKIP LOCKED` dispatcher, idempotency keys on order creation, optimistic concurrency (two staff tapping the same order get a clear 409, not a 500). Combo and add-on prices are calculated on the server only.
 - **Security:** tenant filters from claims, hashed 128-bit tracking tokens that expire, cookie auth with a CSRF header, rate limits on login, public and NFC routes, image byte sniffing on uploads, and a WCAG contrast guard on brand colours.
-- **Web:** Vite + TypeScript with Preact behind `preact/compat`. The customer page ships **39.9 KB gzip** of JavaScript (budget 90 KB). Spring motion is written into CSS `linear()` curves, scenes are SVG and CSS, and motion respects reduced-motion settings.
+- **Web:** Vite + TypeScript with Preact behind `preact/compat`. The customer page ships **40.8 KB gzip** of JavaScript (budget 90 KB). Spring motion is written into CSS `linear()` curves, scenes are SVG and CSS, and motion respects reduced-motion settings.
 - **Tests (15 Nov 2026):** 57 unit, 16 integration against a real Postgres, 14 Playwright end-to-end on Chrome including axe accessibility checks, and 5 voice-parser tests. All passing.
 
 ## Status, honestly
 
 - Built and tested locally: setup, counter, voice capture, menu builder, kitchen board, customer page, NFC hand-off.
 - Not deployed. No businesses use it yet.
-- Open polish items: dark-surface button contrast, "just now" wording under a minute, more scenes (pizza, desserts, juice, fried chicken, rice plates, sandwiches).
+- The pickup TV gives Ready most of the screen, moves numbers that have waited over 5 minutes to a "ready a while ago" row instead of dropping them, and says the number out loud after the chime (English only so far).
+- Still to do: more scenes (pizza, desserts, juice, fried chicken, sandwiches), Bahasa Melayu and Chinese, and letting staff put any number on the TV (for example rider codes).
 - Voice capture uses the browser's speech service and needs testing on real counter devices.
 
 ## Brand
 
-A counter service bell for the symbol, the "it's ready" sound in any kitchen, and a soft "taza" wordmark with steam rising off the z. Red `#D62D20` and yellow `#FFC21A`, set in Fredoka.
+A counter service bell for the symbol, the "it's ready" sound in any kitchen, and a "taza" wordmark with steam rising off the z. Red `#D62D20` and yellow `#FFC21A`. Titles and numbers are set in Funnel Display, everything else in Funnel Sans. The food art uses one drawing style everywhere: a warm ink outline, flat colours and one shaded side, with no faces.
 
 ---
 
